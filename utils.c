@@ -57,3 +57,16 @@ void parse_and_execute(char *line, monty_stack_t **stack) {
     fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
     exit(EXIT_FAILURE);
 }
+
+void free_stack(monty_stack_t **stack)
+{
+    monty_stack_t *current = *stack;
+    monty_stack_t *next;
+
+    while (current != NULL) {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+    *stack = NULL;
+}
