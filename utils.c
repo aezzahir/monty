@@ -29,7 +29,7 @@ void parse_and_execute(char *line, monty_stack_t **stack) {
 
     if (line == NULL) {
         fprintf(stderr, "Error: Null line passed to parse_and_execute\n");
-        exit(EXIT_FAILURE);
+        return;
     }
 
     opcode = strtok(line, " \t\n");
@@ -42,7 +42,7 @@ void parse_and_execute(char *line, monty_stack_t **stack) {
     if (strcmp(opcode, "push") == 0) {
         if (num_str == NULL || !is_number(num_str)) {
             fprintf(stderr, "L%d: usage: push integer\n", line_number);
-            exit(EXIT_FAILURE);
+            return;
         }
         n = atoi(num_str);
     }
@@ -55,7 +55,7 @@ void parse_and_execute(char *line, monty_stack_t **stack) {
     }
 
     fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-    exit(EXIT_FAILURE);
+    return;
 }
 
 void free_stack(monty_stack_t **stack)
