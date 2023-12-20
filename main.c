@@ -6,22 +6,18 @@
 int main(int argc, char **argv) {
     int fd;
     char *line;
-    int i;
+    monty_stack_t *stack = NULL;
     if (argc == 2)
     {
         fd = open(argv[1], O_RDONLY);
-	    i = 1;
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        printf("%d - %s", i, line);
-		i++;
-        free(line);
+        line = get_next_line(fd);
+        while (line != NULL)
+        {
+            parse_and_execute(line, &stack);
+            free(line);
+            line = get_next_line(fd);
+        }
+        close(fd);
     }
-    free(line);
-    close(fd);
-    }
-    // Open the Monty byte code file
-    // Read and execute the instructions
-    // Clean up and exit
-    return (EXIT_SUCCESS);
+    return (0);
 }
