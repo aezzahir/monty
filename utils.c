@@ -1,6 +1,8 @@
 #include "monty.h"
 
 int is_number(char *str) {
+    if (!str)
+        return 0;
     if (*str == '-' || *str == '+') {
         str++;
     }
@@ -37,18 +39,16 @@ void parse_and_execute(char *line, monty_stack_t **stack) {
     }
 
     num_str = strtok(NULL, " \t\n");
-    if (num_str != NULL) {
-        if (!is_number(num_str)) {
+    if (!is_number(num_str)) 
+    {
             fprintf(stderr, "L%d: usage: push integer\n", n);
             exit(EXIT_FAILURE);
-        }
-        n = (unsigned int)atoi(num_str);
     }
+    n = (unsigned int)atoi(num_str);
 
     for (i = 0; instructions[i].opcode != NULL; i++) {
         if (strcmp(opcode, instructions[i].opcode) == 0) {
-            if (n != 0)
-                instructions[i].f(stack, n);
+            instructions[i].f(stack, n);
             return;
         }
     }
