@@ -47,7 +47,8 @@ void parse_and_execute(char *line, monty_stack_t **stack) {
 
     for (i = 0; instructions[i].opcode != NULL; i++) {
         if (strcmp(opcode, instructions[i].opcode) == 0) {
-            instructions[i].f(stack, n);
+            if (n != 0)
+                instructions[i].f(stack, n);
             return;
         }
     }
