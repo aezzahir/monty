@@ -51,7 +51,7 @@ char	*extract_line(ssize_t bytes_read, char *pos_newline, char **saved)
 
 char	*get_next_line(int fd)
 {
-	static char	*saved[OPEN_MAX];
+	static char	*saved[FOPEN_MAX];
 	char		*buf;
 	char		*line;
 	char		*pos_newline;

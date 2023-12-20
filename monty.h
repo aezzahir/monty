@@ -6,7 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <limits.h>
-#  define BUFFER_SIZE 32
+#define BUFFER_SIZE 32
 typedef struct stack_s {
     int n;
     struct stack_s *prev;
