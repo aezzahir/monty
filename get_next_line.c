@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "monty.h"
 
 ssize_t	read_buffer(int fd, char *buf, char **saved)
 {
