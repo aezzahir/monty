@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <limits.h>
+#include <ctype.h>
 #define BUFFER_SIZE 32
 typedef struct stack_s {
     int n;
@@ -26,6 +27,8 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strndup(char *str, size_t n);
 char	*ft_strjoin(char *s1, char *s2);
 char	*get_next_line(int fd);
+int is_number(char *str);
+
 
 void push(monty_stack_t **stack, unsigned int line_number);
 void pall(monty_stack_t **stack, unsigned int line_number);
