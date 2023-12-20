@@ -41,7 +41,7 @@ char	*ft_strndup(char *str, size_t n)
 	if (!str)
 		return (NULL);
 	len = ft_strlen(str);
-	if (n < len && n >= 0)
+	if (n < len)
 		len = n;
 	ptr = (char *)malloc((len + 1) * sizeof(char));
 	if (!ptr)
