@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <limits.h>
 #include <ctype.h>
 #define BUFFER_SIZE 32
 typedef struct stack_s {
