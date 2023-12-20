@@ -51,29 +51,27 @@ char	*extract_line(ssize_t bytes_read, char *pos_newline, char **saved)
 
 char	*get_next_line(int fd)
 {
-	static char	*saved[FOPEN_MAX];
+	static char	*saved;
 	char		*buf;
 	char		*line;
 	char		*pos_newline;
 	ssize_t		bytes_read;
 
 	bytes_read = 1;
-	if (fd < 0 || BUFFER_SIZE >= INT_MAX || BUFFER_SIZE <= 0 || fd >= OPEN_MAX)
-		return (NULL);
-	if (!saved[fd])
-		saved[fd] = ft_strndup("", 0);
-	pos_newline = ft_strchr(saved[fd], '\n');
+	if (!saved)
+		saved = ft_strndup("", 0);
+	pos_newline = ft_strchr(saved, '\n');
 	while (pos_newline == NULL)
 	{
 		buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buf)
 			return (NULL);
-		bytes_read = read_buffer(fd, buf, &saved[fd]);
+		bytes_read = read_buffer(fd, buf, &saved);
 		free(buf);
 		if (bytes_read <= 0)
 			break ;
-		pos_newline = ft_strchr(saved[fd], '\n');
+		pos_newline = ft_strchr(saved, '\n');
 	}
-	line = extract_line(bytes_read, pos_newline, &saved[fd]);
+	line = extract_line(bytes_read, pos_newline, &saved);
 	return (line);
 }
