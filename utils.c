@@ -15,19 +15,18 @@ int is_number(char *str) {
     return 1;
 }
 
-#include "monty.h"
 
 void parse_and_execute(char *line, monty_stack_t **stack) {
     char *opcode;
     char *num_str;
-    unsigned int n = 0;
-    int i;
+    static unsigned int line_number = 0;
+    int i, n;
     instruction_t instructions[] = {
         {"push", push},
         {"pall", pall},
         {NULL, NULL}
     };
-
+    line_number++;
     if (line == NULL) {
         fprintf(stderr, "Error: Null line passed to parse_and_execute\n");
         exit(EXIT_FAILURE);
@@ -39,10 +38,9 @@ void parse_and_execute(char *line, monty_stack_t **stack) {
     }
 
     num_str = strtok(NULL, " \t\n");
-    if (!is_number(num_str)) 
-    {
-            fprintf(stderr, "L%d: usage: push integer\n", n);
-            exit(EXIT_FAILURE);
+    if (!is_number(num_str)) {
+        fprintf(stderr, "L%d: usage: push integer\n", line_number);
+        exit(EXIT_FAILURE);
     }
     n = (unsigned int)atoi(num_str);
 
@@ -53,6 +51,6 @@ void parse_and_execute(char *line, monty_stack_t **stack) {
         }
     }
 
-    fprintf(stderr, "L%d: unknown instruction %s\n", n, opcode);
+    fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
     exit(EXIT_FAILURE);
 }
