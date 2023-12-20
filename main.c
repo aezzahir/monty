@@ -5,7 +5,7 @@
 int main(int argc, char **argv) {
     int fd;
     char *line;
-    monty_stack_t *stack = NULL;
+    monty_stack_t *stack = ;
 
     if (argc != 2) {
         fprintf(stderr, "USAGE: monty file\n");
